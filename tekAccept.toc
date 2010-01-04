@@ -1,11 +1,8 @@
-## Interface: 20300
+## Interface: 30300
 ## Title: tekAccept
 ## Notes: Auto-accept invites from guild members and friends
 ## Author: Tekkub Stoutwrithe
 ## Version: Alpha
-
-## LoadManagers: AddonLoader
-## X-LoadOn-Always: delayed
 
 tekAccept.lua
 
