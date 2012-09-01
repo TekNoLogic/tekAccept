@@ -20,3 +20,18 @@ end)
 StaticPopupDialogs["LOOT_BIND"].OnCancel = function(self, slot)
 	if GetNumGroupMembers() == 0 then ConfirmLootSlot(slot) end
 end
+
+
+local triggers = {
+	["Teleportation to the cannon will cost:"] = true,
+	["Travel to the faire staging area will cost:"] = true,
+}
+local f = CreateFrame("Frame")
+f:RegisterEvent("GOSSIP_CONFIRM")
+f:SetScript("OnEvent", function(self, event, _, text)
+	if not triggers[text] then return end
+	local frame = StaticPopup1
+	if frame.which == "GOSSIP_CONFIRM" and frame:IsVisible() then
+		StaticPopup_OnClick(frame, 1)
+	end
+end)
