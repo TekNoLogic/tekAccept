@@ -18,5 +18,5 @@ end)
 
 
 StaticPopupDialogs["LOOT_BIND"].OnCancel = function(self, slot)
-	if GetNumPartyMembers() == 0 and GetNumRaidMembers() == 0 then ConfirmLootSlot(slot) end
+	if GetNumGroupMembers() == 0 then ConfirmLootSlot(slot) end
 end
