@@ -1,17 +1,38 @@
 ﻿
 local function IsFriend(name)
-	for i=1,GetNumFriends() do if GetFriendInfo(i) == name then return true end end
-	if IsInGuild() then for i=1, GetNumGuildMembers() do if GetGuildRosterInfo(i) == name then return true end end end
+	local _, bnet_online = BNGetNumFriends()
+	for i=1,bnet_online do
+		local _, _, _, _, _, toonID, _, online = BNGetFriendInfo(i)
+
+		if online and toonID then
+			local _, toonName, _, realmName = BNGetToonInfo(toonID)
+  		if toonName..'-'..realmName == name then return true end
+		end
+	end
+
+	for i=1,GetNumFriends() do
+		if GetFriendInfo(i) == name then return true end
+	end
+
+	if IsInGuild() then
+		for i=1, GetNumGuildMembers() do
+			if GetGuildRosterInfo(i) == name then return true end
+		end
+	end
 end
 
 
+local whiches = {PARTY_INVITE = true, PARTY_INVITE_XREALM = true}
 local f = CreateFrame("Frame")
 f:RegisterEvent("PARTY_INVITE_REQUEST")
-f:SetScript("OnEvent", function(frame, event, name)
+f:SetScript("OnEvent", function(frame, event, name, ...)
+	print(event, name, ...)
 	if IsFriend(name) then
 		for i=1,STATICPOPUP_NUMDIALOGS do
 			local frame = getglobal("StaticPopup"..i)
-			if frame:IsVisible() and frame.which == "PARTY_INVITE" then StaticPopup_OnClick(frame, 1) end
+			if frame:IsVisible() and whiches[frame.which] then
+				StaticPopup_OnClick(frame, 1)
+			end
 		end
 	else SendWho(string.join("", "n-\"", name, "\"")) end
 end)
