@@ -26,7 +26,6 @@ local whiches = {PARTY_INVITE = true, PARTY_INVITE_XREALM = true}
 local f = CreateFrame("Frame")
 f:RegisterEvent("PARTY_INVITE_REQUEST")
 f:SetScript("OnEvent", function(frame, event, name, ...)
-	print(event, name, ...)
 	if IsFriend(name) then
 		for i=1,STATICPOPUP_NUMDIALOGS do
 			local frame = getglobal("StaticPopup"..i)
