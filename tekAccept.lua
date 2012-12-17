@@ -45,6 +45,7 @@ end
 local triggers = {
 	["Teleportation to the cannon will cost:"] = true,
 	["Travel to the faire staging area will cost:"] = true,
+	["A small fee for supplies is required."] = true,
 }
 local f = CreateFrame("Frame")
 f:RegisterEvent("GOSSIP_CONFIRM")
