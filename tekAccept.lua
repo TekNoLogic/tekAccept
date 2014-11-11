@@ -1,4 +1,5 @@
 ﻿
+local myrealm = GetRealmName()
 local function IsFriend(name)
 	local _, bnet_online = BNGetNumFriends()
 	for i=1,bnet_online do
@@ -6,6 +7,7 @@ local function IsFriend(name)
 
 		if online and toonID then
 			local _, toonName, _, realmName = BNGetToonInfo(toonID)
+  		if realmName == myrealm and toonName == name then return true end
   		if toonName..'-'..realmName == name then return true end
 		end
 	end
