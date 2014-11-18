@@ -7,6 +7,7 @@ local function IsFriend(name)
 
 		if online and toonID then
 			local _, toonName, _, realmName = BNGetToonInfo(toonID)
+			realmName = realmName:gsub(" ", "")
   		if realmName == myrealm and toonName == name then return true end
   		if toonName..'-'..realmName == name then return true end
 		end
